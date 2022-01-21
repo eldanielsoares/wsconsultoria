@@ -11,4 +11,9 @@ export class AuthService {
     await this.auth.setPersistence('local');
     return await this.auth.signInWithEmailAndPassword(email, password);
   }
+
+  async signupService(email: string, password: string) {
+    await this.auth.setPersistence('local');
+    return await this.auth.createUserWithEmailAndPassword(email, password);
+  }
 }

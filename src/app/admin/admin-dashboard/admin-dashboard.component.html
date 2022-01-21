@@ -1,0 +1,11 @@
+<div class="container">
+  <mat-card *ngFor="let user of users$ | async">
+    <article class="titlecard">{{user.name}}</article>
+    <mat-icon>chevron_right</mat-icon>
+  </mat-card>
+</div>
+<div class="fab">
+  <button mat-mini-fab color="primary" (click)="goToAddDocuments()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

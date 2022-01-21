@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from './main/main.module';
 @NgModule({
@@ -27,7 +28,8 @@ import { MainModule } from './main/main.module';
     AuthModule,
     ReactiveFormsModule,
     MainModule,
-    AdminModule
+    AdminModule,
+    AngularFirestoreModule
   ],
   providers: [
     ScreenTrackingService, UserTrackingService
