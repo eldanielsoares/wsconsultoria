@@ -1,0 +1,21 @@
+<div class="container">
+  <form [formGroup]="signin" class="form" (ngSubmit)="handleSignIn()" *ngIf="!loading; else loadingTemplate">
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail de administrador</mat-label>
+      <input matInput required placeholder="Digite seu usuário" formControlName="email" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" required placeholder="Digite sua senha"
+        formControlName="password" autocomplete="off">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="!signin.valid" type="submit">Entrar</button>
+  </form>
+  <ng-template #loadingTemplate>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>
