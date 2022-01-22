@@ -28,7 +28,7 @@ export class SigninComponent implements OnInit {
       const password = this.signin.controls['password'].value;
       const data = await this.authService.loginService(`${email}@email.com`, password);
       this.loading = false;
-      this.routes.navigateByUrl('/home');
+      this.routes.navigateByUrl('/home', { replaceUrl: true });
 
 
     } catch (err) {

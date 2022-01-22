@@ -31,7 +31,7 @@ export class AdminSignupComponent implements OnInit {
   async handleCreateAdmin(uid: string, user: UserAdmin) {
     try {
       await this.adminService.createAdmin(uid, user);
-      this.routes.navigateByUrl('/admin/admin-dashboard');
+      this.routes.navigateByUrl('/admin/admin-dashboard', { replaceUrl: true });
     } catch (err) {
       console.log(err);
 

@@ -28,7 +28,7 @@ export class AdminSigninComponent implements OnInit {
       const password = this.signin.controls['password'].value;
       const data = await this.authService.loginService(email, password);
       this.loading = false;
-      this.routes.navigateByUrl('/admin/admin-dashboard');
+      this.routes.navigateByUrl('/admin/admin-dashboard', { replaceUrl: true });
 
 
     } catch (err) {
