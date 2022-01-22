@@ -18,10 +18,10 @@
   </mat-form-field>
 
   <article class="title" style="margin: 16px 0;">
-    Nome usuário
+    {{user?.name}}
   </article>
 
-  <mat-card *ngFor="let docs of documents">
+  <mat-card *ngFor="let docs of documents$ | async">
     <article class="title">
       {{docs.type}}
     </article>

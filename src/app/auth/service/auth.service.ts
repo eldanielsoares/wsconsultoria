@@ -16,4 +16,8 @@ export class AuthService {
     await this.auth.setPersistence('local');
     return await this.auth.createUserWithEmailAndPassword(email, password);
   }
+
+  async signOutService() {
+    return await this.auth.signOut();
+  }
 }

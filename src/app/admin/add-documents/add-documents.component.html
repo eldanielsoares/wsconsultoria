@@ -17,9 +17,10 @@
       </mat-select>
     </mat-form-field>
     <div class="containerFile">
-      <input type="file" accept="application/pdf">
+      <input type="file" accept="application/pdf" (change)="getFile($event)">
     </div>
-    <button mat-raised-button color="primary" [disabled]="!addDoc.valid" type="submit">Salvar documento</button>
+    <button mat-raised-button color="primary" [disabled]="!addDoc.valid || uploadedDoc == null" type="submit">Salvar
+      documento</button>
   </form>
   <ng-template #loadingTemplate>
     <mat-spinner></mat-spinner>

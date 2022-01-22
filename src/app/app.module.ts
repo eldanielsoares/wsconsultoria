@@ -12,8 +12,10 @@ import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analyt
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from './main/main.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent
@@ -29,7 +31,9 @@ import { MainModule } from './main/main.module';
     ReactiveFormsModule,
     MainModule,
     AdminModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    HttpClientModule
   ],
   providers: [
     ScreenTrackingService, UserTrackingService

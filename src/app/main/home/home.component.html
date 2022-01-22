@@ -1,6 +1,6 @@
 <mat-toolbar>
   <img src="../../../assets/ws_logo.png">
-  <button mat-icon-button>
+  <button mat-icon-button (click)="handleLogout()">
     <mat-icon class="icon">logout</mat-icon>
   </button>
 </mat-toolbar>
@@ -17,12 +17,12 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-card *ngFor="let docs of documents">
+  <mat-card *ngFor="let docs of documents$ | async">
     <article class="title">
       {{docs.type}}
     </article>
     <div>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="openPdf(docs.url)">
         <mat-icon>open_in_browser</mat-icon>
       </button>
       <button mat-icon-button>

@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 export class AddUserComponent implements OnInit {
   addUser = this.fb.group({
     'name': ['', [Validators.required]],
-    'email': ['', [Validators.required, Validators.email]],
+    'username': ['', [Validators.required]],
     'password': ['', [Validators.required, Validators.minLength(6)]],
   });
   hide = true;

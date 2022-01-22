@@ -1,6 +1,6 @@
 <mat-toolbar>
   <img src="../../../assets/ws_logo.png">
-  <button mat-icon-button>
+  <button mat-icon-button (click)="handleLogout()">
     <mat-icon class="icon">logout</mat-icon>
   </button>
 </mat-toolbar>
@@ -16,7 +16,7 @@
     </button>
   </div>
 
-  <mat-card *ngFor="let user of users$ | async" (click)="goToAddDocuments()">
+  <mat-card *ngFor="let user of users$ | async" (click)="goToAddDocuments(user)">
     <article class="title">
       {{user.name}}
     </article>

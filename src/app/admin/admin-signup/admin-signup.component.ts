@@ -47,7 +47,7 @@ export class AdminSignupComponent implements OnInit {
       this.loading = false;
       const user: UserAdmin = {
         admin: true,
-        docId: data.user?.uid,
+        uid: data.user?.uid,
         name: this.signup.controls['name'].value
       }
 

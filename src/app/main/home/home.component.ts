@@ -1,4 +1,11 @@
+import { AdminService } from './../../admin/services/admin.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/service/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Documents } from 'src/app/interfaces/documents.dto';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-home',
@@ -7,21 +14,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   types = ['CPF', 'RG', 'Carteira de motorista'];
-  documents = [
-    { type: 'CPF' },
-    { type: 'RG' },
-    { type: 'Carteira de motorista' },
-    { type: 'Certidão de nascimento' },
-    { type: 'Cartão do sus' },
-  ]
-  constructor() { }
+  documents$?: Observable<Documents[]>
+  subscription = new Subscription
+  meta?: Observable<any>;
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private fireAuth: AngularFireAuth,
+    private adminService: AdminService,
+    private storage: AngularFireStorage
+  ) { }
 
   ngOnInit(): void {
+    const user = this.fireAuth.authState.subscribe((user) => {
+      this.documents$ = this.adminService.getDocs(user?.uid!)
+    });
+    this.subscription.add(user);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+    this.subscription = new Subscription;
   }
 
   categoria(evt: any) {
     console.log(evt.value);
+  }
 
+  async handleLogout() {
+    try {
+      await this.auth.signOutService();
+      this.router.navigateByUrl('/signin', { replaceUrl: true });
+    } catch (err) {
+      console.log(err);
+
+    }
+  }
+
+  openPdf(url: string) {
+    window.open(url);
   }
 
 }

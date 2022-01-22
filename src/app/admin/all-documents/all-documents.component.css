@@ -44,10 +44,11 @@ mat-card {
   justify-content: space-between;
   align-items: center;
   margin: 5px 0;
+  flex-wrap: nowrap;
 }
 
 .title {
-  font-size: 18px;
+  font-size: 14px;
   color: #111;
   font-weight: 500;
   overflow: hidden;

@@ -1,5 +1,10 @@
 export interface UserAdmin {
   name?: string;
   admin?: boolean;
-  docId?: string;
+  uid?: string;
+}
+
+export interface User {
+  name?: string;
+  uid?: string;
 }
