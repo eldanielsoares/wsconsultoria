@@ -1,5 +1,7 @@
 <div class="container">
   <form [formGroup]="signin" class="form" (ngSubmit)="handleSignIn()" *ngIf="!loading; else loadingTemplate">
+    <img src="../../../assets/ws_logo.png">
+    <article>Bem-vindo a WS Consultoria</article>
     <mat-form-field appearance="outline">
       <mat-label>Usuário</mat-label>
       <input matInput required placeholder="Digite seu usuário" formControlName="email" autocomplete="off">

@@ -1,1 +1,42 @@
-<p>all-documents works!</p>
+<mat-toolbar>
+  <button mat-icon-button style="width: auto;">
+    <mat-icon class="icon" (click)="goback()">chevron_left</mat-icon>
+    Todos os documentos do usuário
+  </button>
+</mat-toolbar>
+<div class="container">
+  <mat-form-field appearance="outline">
+    <mat-label>Tipo de documento</mat-label>
+    <mat-select (selectionChange)="categoria($event)">
+      <mat-option value="Todos">
+        Todos
+      </mat-option>
+      <mat-option *ngFor="let categories of types" [value]="categories">
+        {{categories}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <article class="title" style="margin: 16px 0;">
+    Nome usuário
+  </article>
+
+  <mat-card *ngFor="let docs of documents">
+    <article class="title">
+      {{docs.type}}
+    </article>
+    <div>
+      <button mat-icon-button color="accent" (click)="goToEditDoc()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>
+<div class="fab">
+  <button mat-mini-fab color="primary" (click)="goToAddDoc()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

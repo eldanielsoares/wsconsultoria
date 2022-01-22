@@ -1,11 +1,34 @@
+<mat-toolbar>
+  <img src="../../../assets/ws_logo.png">
+  <button mat-icon-button>
+    <mat-icon class="icon">logout</mat-icon>
+  </button>
+</mat-toolbar>
+
 <div class="container">
-  <mat-card *ngFor="let user of users$ | async">
-    <article class="titlecard">{{user.name}}</article>
-    <mat-icon>chevron_right</mat-icon>
+  <div class="containerFilter">
+    <mat-form-field appearance="outline">
+      <mat-label>Filtrar por nome</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <button mat-button class="icon-button">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+
+  <mat-card *ngFor="let user of users$ | async" (click)="goToAddDocuments()">
+    <article class="title">
+      {{user.name}}
+    </article>
+    <div>
+      <button mat-icon-button>
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
   </mat-card>
 </div>
 <div class="fab">
-  <button mat-mini-fab color="primary" (click)="goToAddDocuments()">
+  <button mat-mini-fab color="primary" (click)="goToAddUser()">
     <mat-icon>add</mat-icon>
   </button>
 </div>

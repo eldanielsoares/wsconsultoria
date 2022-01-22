@@ -1,1 +1,27 @@
-<p>edit-documents works!</p>
+<mat-toolbar>
+  <button mat-icon-button style="width: auto;">
+    <mat-icon class="icon" (click)="goback()">chevron_left</mat-icon>
+    Editar documento
+  </button>
+</mat-toolbar>
+
+<div class="container">
+  <form [formGroup]="editDoc" class="form" (ngSubmit)="handleEditDoc()" *ngIf="!loading; else loadingTemplate">
+    <article>Preencha os dados do documento</article>
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo de documento</mat-label>
+      <mat-select formControlName="type">
+        <mat-option *ngFor="let categories of types" [value]="categories">
+          {{categories}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="containerFile">
+      <input type="file" accept="application/pdf">
+    </div>
+    <button mat-raised-button color="primary" [disabled]="!editDoc.valid" type="submit">Salvar documento</button>
+  </form>
+  <ng-template #loadingTemplate>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>

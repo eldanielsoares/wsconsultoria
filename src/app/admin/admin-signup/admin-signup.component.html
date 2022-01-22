@@ -1,5 +1,7 @@
 <div class="container">
   <form [formGroup]="signup" class="form" (ngSubmit)="handleSignup()" *ngIf="!loading; else loadingTemplate">
+    <img src="../../../assets/ws_logo.png">
+    <article>Crie sua conta de administrador</article>
     <mat-form-field appearance="outline">
       <mat-label>Nome de administrador</mat-label>
       <input matInput required placeholder="Digite seu nome" formControlName="name" autocomplete="off">

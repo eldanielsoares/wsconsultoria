@@ -1,28 +1,74 @@
-.container{
+
+mat-toolbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.icon {
+  color: #707070;
+  font-size: 30px;
+}
+
+.container {
   width: 100%;
   height: 100%;
-  margin: 0;
+  padding-top: 65px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.containerFilter {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+  height: 50px;
+}
+
+.icon-button{
+  background-color: #f7ca18;
+  height: 50px;
+  margin-top: 5px;
+}
+
 mat-card {
   width: 80%;
-  height: 30px;
-  margin-top: 10px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
 }
 
-mat-card:hover {
-  background-color: #fff000;
-}
-
-.titlecard {
-  font-size: 16px;
+.title {
+  font-size: 18px;
   color: #111;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .fab {
@@ -30,5 +76,3 @@ mat-card:hover {
   bottom: 24px;
   right: 24px;
 }
-
-

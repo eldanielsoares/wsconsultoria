@@ -1,5 +1,7 @@
 <div class="container">
   <form [formGroup]="signin" class="form" (ngSubmit)="handleSignIn()" *ngIf="!loading; else loadingTemplate">
+    <img src="../../../assets/ws_logo.png">
+    <article>Bem-vindo a WS Consultoria<br>Entre com sua conta de administrador</article>
     <mat-form-field appearance="outline">
       <mat-label>E-mail de administrador</mat-label>
       <input matInput required placeholder="Digite seu usuário" formControlName="email" autocomplete="off">
@@ -14,7 +16,7 @@
       </button>
     </mat-form-field>
     <button mat-raised-button color="primary" [disabled]="!signin.valid" type="submit">Entrar</button>
-    <button mat-button color="primary" routerLink="/admin/admin-signup">Criar conta de administrador</button>
+    <button mat-raised-button routerLink="/admin/admin-signup">Criar conta de administrador</button>
   </form>
 
   <ng-template #loadingTemplate>

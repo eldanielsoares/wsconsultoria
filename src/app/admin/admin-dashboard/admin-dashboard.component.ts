@@ -19,7 +19,11 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   goToAddDocuments() {
-    this.router.navigateByUrl('/admin/add-documents')
+    this.router.navigateByUrl('/admin/all-documents')
+  }
+
+  goToAddUser() {
+    this.router.navigateByUrl('/admin/add-user')
   }
 
 }
