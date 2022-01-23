@@ -7,15 +7,18 @@ import { AdminSigninComponent } from './admin-signin/admin-signin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
+import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['admin/admin-signin']);
+const redirectLoggedInToItems = () => redirectLoggedInTo(['admin/admin-dashboard']);
 
 const routes: Routes = [
-  { path: 'admin-signin', component: AdminSigninComponent },
-  { path: 'admin-signup', component: AdminSignupComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent },
-  { path: 'add-documents', component: AddDocumentsComponent },
-  { path: 'all-documents', component: AllDocumentsComponent },
-  { path: 'edit-documents', component: EditDocumentsComponent },
-  { path: 'add-user', component: AddUserComponent },
+  { path: 'admin-signin', component: AdminSigninComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToItems } },
+  { path: 'admin-signup', component: AdminSignupComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToItems } },
+  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'add-documents', component: AddDocumentsComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'all-documents', component: AllDocumentsComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'edit-documents', component: EditDocumentsComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'add-user', component: AddUserComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
 ];
 
 @NgModule({
