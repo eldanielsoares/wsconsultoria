@@ -1,3 +1,9 @@
+<mat-toolbar>
+  <button mat-icon-button style="width: auto;">
+    <mat-icon class="icon" (click)="goback()">chevron_left</mat-icon>
+  </button>
+</mat-toolbar>
+
 <div class="container">
   <form [formGroup]="signup" class="form" (ngSubmit)="handleSignup()" *ngIf="!loading; else loadingTemplate">
     <img src="../../../assets/ws_logo.png">

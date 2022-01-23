@@ -64,3 +64,22 @@ mat-card {
   bottom: 24px;
   right: 24px;
 }
+
+article {
+  font-size: 16px;
+  color: #111;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+@media screen and (min-width: 768px) {
+
+  mat-form-field {
+    width: 50%;
+  }
+
+  mat-card {
+    width: 50%;
+  }
+}

@@ -17,12 +17,12 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-card *ngFor="let docs of documents$ | async">
+  <mat-card *ngFor="let docs of documents$ | async" (click)="openPdf(docs.url!)">
     <article class="title">
       {{docs.type}}
     </article>
     <div>
-      <button mat-icon-button (click)="openPdf(docs.url!)">
+      <button mat-icon-button>
         <mat-icon>chevron_right</mat-icon>
       </button>
     </div>

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,9 +24,14 @@ export class AdminSignupComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private adminService: AdminService,
-    private routes: Router) { }
+    private routes: Router,
+    private location: Location) { }
 
   ngOnInit(): void {
+  }
+
+  goback() {
+    this.location.back()
   }
 
   async handleCreateAdmin(uid: string, user: UserAdmin) {
