@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/service/auth.service';
+import { NotifyService } from 'src/app/notifications/notify.service';
 
 @Component({
   selector: 'app-admin-signin',
@@ -16,7 +17,11 @@ export class AdminSigninComponent implements OnInit {
   hide = true;
   loading = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private routes: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private routes: Router,
+    private notify: NotifyService) { }
 
   ngOnInit(): void {
   }
@@ -32,7 +37,7 @@ export class AdminSigninComponent implements OnInit {
 
 
     } catch (err) {
-      console.log(err);
+      this.notify.notifications('Algo deu errado, verifique seus dados e tente novamente');
       this.loading = false;
     }
   }

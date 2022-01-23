@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Documents } from 'src/app/interfaces/documents.dto';
 import { User } from 'src/app/interfaces/user.dto';
+import { NotifyService } from 'src/app/notifications/notify.service';
 
 @Component({
   selector: 'app-all-documents',
@@ -19,7 +20,8 @@ export class AllDocumentsComponent implements OnInit {
   constructor(
     private router: Router,
     private location: Location,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private notify: NotifyService
   ) {
     const nav = this.router.getCurrentNavigation()
     this.user = nav?.extras.state?.user;
@@ -49,8 +51,7 @@ export class AllDocumentsComponent implements OnInit {
     try {
       await this.adminService.deleteDoc(docId);
     } catch (err) {
-      console.log(err);
-
+      this.notify.notifications(err as string);
     }
   }
 

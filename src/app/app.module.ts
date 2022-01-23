@@ -16,6 +16,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from './main/main.module';
 import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent

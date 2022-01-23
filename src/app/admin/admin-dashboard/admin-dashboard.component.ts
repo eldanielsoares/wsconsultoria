@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserAdmin } from 'src/app/interfaces/user.dto';
 import { AdminService } from '../services/admin.service';
+import { NotifyService } from 'src/app/notifications/notify.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,7 +16,9 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private router: Router,
-    private auth: AuthService) { }
+    private auth: AuthService,
+    private notify: NotifyService
+  ) { }
 
   ngOnInit(): void {
     this.users$ = this.adminService.getUsers();
@@ -39,7 +42,7 @@ export class AdminDashboardComponent implements OnInit {
       }
 
     } catch (err) {
-      console.log(err);
+      this.notify.notifications(err as string);
     }
   }
 
@@ -48,7 +51,7 @@ export class AdminDashboardComponent implements OnInit {
       await this.auth.signOutService();
       this.router.navigateByUrl('/admin/admin-signin', { replaceUrl: true });
     } catch (err) {
-      console.log(err);
+      this.notify.notifications(err as string);
 
     }
   }

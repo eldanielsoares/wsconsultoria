@@ -4,6 +4,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { UserAdmin } from 'src/app/interfaces/user.dto';
+import { NotifyService } from 'src/app/notifications/notify.service';
 import { AdminService } from '../services/admin.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class AdminSignupComponent implements OnInit {
     private authService: AuthService,
     private adminService: AdminService,
     private routes: Router,
-    private location: Location) { }
+    private location: Location,
+    private notify: NotifyService) { }
 
   ngOnInit(): void {
   }
@@ -39,7 +41,7 @@ export class AdminSignupComponent implements OnInit {
       await this.adminService.createAdmin(uid, user);
       this.routes.navigateByUrl('/admin/admin-dashboard', { replaceUrl: true });
     } catch (err) {
-      console.log(err);
+      this.notify.notifications(err as string);
 
     }
   }
@@ -60,7 +62,7 @@ export class AdminSignupComponent implements OnInit {
       this.handleCreateAdmin(data.user?.uid!, user);
 
     } catch (err) {
-      console.log(err);
+      this.notify.notifications('Algo deu errado, verifique seus dados e tente novamente');
       this.loading = false;
     }
   }

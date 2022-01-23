@@ -7,6 +7,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import * as uuid from 'uuid';
 import { Documents } from 'src/app/interfaces/documents.dto';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { NotifyService } from 'src/app/notifications/notify.service';
 @Component({
   selector: 'app-add-documents',
   templateUrl: './add-documents.component.html',
@@ -26,7 +27,8 @@ export class AddDocumentsComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private storage: AngularFireStorage,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private notify: NotifyService
   ) {
     const nav = this.router.getCurrentNavigation()
     this.user = nav?.extras.state?.user;
@@ -64,7 +66,7 @@ export class AddDocumentsComponent implements OnInit {
         this.loading = false;
       });
     } catch (err) {
-      console.log(err);
+      this.notify.notifications(err as string);
       this.loading = false;
     }
   }

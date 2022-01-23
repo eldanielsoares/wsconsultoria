@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Documents } from 'src/app/interfaces/documents.dto';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { NotifyService } from 'src/app/notifications/notify.service';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private fireAuth: AngularFireAuth,
     private adminService: AdminService,
+    private notify: NotifyService
   ) { }
 
   ngOnInit(): void {
@@ -51,8 +53,7 @@ export class HomeComponent implements OnInit {
       await this.auth.signOutService();
       this.router.navigateByUrl('/signin', { replaceUrl: true });
     } catch (err) {
-      console.log(err);
-
+      this.notify.notifications(err as string);
     }
   }
 

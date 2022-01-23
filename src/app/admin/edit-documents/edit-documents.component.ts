@@ -6,6 +6,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as uuid from 'uuid';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { NotifyService } from 'src/app/notifications/notify.service';
 
 @Component({
   selector: 'app-edit-documents',
@@ -26,7 +27,8 @@ export class EditDocumentsComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private adminService: AdminService,
-    private storage: AngularFireStorage) {
+    private storage: AngularFireStorage,
+    private notify: NotifyService) {
     const nav = this.router.getCurrentNavigation()
     this.docs = nav?.extras.state?.docs;
     this.editDoc.controls['type'].setValue(this.docs?.type);
@@ -75,8 +77,7 @@ export class EditDocumentsComponent implements OnInit {
         this.loading = false;
       });
     } catch (err) {
-      console.log(err);
-
+      this.notify.notifications(err as string);
     }
   }
 
