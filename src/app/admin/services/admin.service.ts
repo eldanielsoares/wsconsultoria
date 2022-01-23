@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { Observable } from 'rxjs';
 import { Documents } from 'src/app/interfaces/documents.dto';
-import { UserAdmin } from 'src/app/interfaces/user.dto';
+import { User, UserAdmin } from 'src/app/interfaces/user.dto';
 import * as Constants from '../../constants/constants';
 
 @Injectable({
@@ -14,6 +14,9 @@ export class AdminService {
   constructor(private afs: AngularFirestore) { }
 
   async createAdmin(docId: string, data: UserAdmin) {
+    return await this.afs.collection(Constants.COLLECTIONS.USER_COLLECTION).doc(docId).set(data);
+  }
+  async createUsers(docId: string, data: User) {
     return await this.afs.collection(Constants.COLLECTIONS.USER_COLLECTION).doc(docId).set(data);
   }
 

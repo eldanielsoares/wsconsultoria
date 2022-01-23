@@ -13,6 +13,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from './main/main.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -34,10 +35,11 @@ import { HttpClientModule } from '@angular/common/http';
     AdminModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireFunctionsModule
   ],
   providers: [
-    ScreenTrackingService, UserTrackingService
+    ScreenTrackingService, UserTrackingService,
   ],
   bootstrap: [AppComponent]
 })

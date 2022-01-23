@@ -1,7 +1,11 @@
+import { AdminService } from './../services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AngularFireFunctions } from '@angular/fire/compat/functions';
+import { User } from 'src/app/interfaces/user.dto';
+import { NotifyService } from 'src/app/notifications/notify.service';
 
 @Component({
   selector: 'app-add-user',
@@ -18,13 +22,38 @@ export class AddUserComponent implements OnInit {
   loading = false;
   constructor(private fb: FormBuilder,
     private routes: Router,
-    private location: Location) { }
+    private fns: AngularFireFunctions,
+    private location: Location,
+    private adminService: AdminService,
+    private notify: NotifyService) { }
 
   ngOnInit(): void {
   }
 
-  handleAddUser() {
-    console.log('here');
+  async handleAddUser() {
+    const name = this.addUser.controls['name'].value;
+    const username = this.addUser.controls['username'].value;
+    const password = this.addUser.controls['password'].value;
+    const data = {
+      email: `${username}@email.com`.toLocaleLowerCase(),
+      displayName: name,
+      password: password
+    }
+
+    const callable = this.fns.httpsCallable('createUser');
+    const res = callable(data).subscribe((result) => {
+      const dataUser: User = {
+        name: name,
+        uid: result
+      }
+      this.adminService.createUsers(result, dataUser).then(() => {
+        this.location.back();
+      }).catch((err) => {
+        this.notify.notifications('Algo deu errado, tente novamente mais tarde');
+      })
+    }, err => {
+      console.log(err);
+    })
 
   }
 
