@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminSigninComponent } from './admin-signin/admin-signin.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AddDocumentsComponent } from './add-documents/add-documents.component';
@@ -27,7 +27,8 @@ import { EditDocumentsComponent } from './edit-documents/edit-documents.componen
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AdminModule { }

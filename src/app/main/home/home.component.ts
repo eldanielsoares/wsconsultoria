@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Documents } from 'src/app/interfaces/documents.dto';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +21,6 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private fireAuth: AngularFireAuth,
     private adminService: AdminService,
-    private storage: AngularFireStorage
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +36,14 @@ export class HomeComponent implements OnInit {
   }
 
   categoria(evt: any) {
-    console.log(evt.value);
+    const user = this.fireAuth.authState.subscribe((user) => {
+      if (evt.value == 'Todos') {
+        this.documents$ = this.adminService.getDocs(user?.uid!)
+      } else {
+        this.documents$ = this.adminService.getDocsFilter(user?.uid!, evt.value)
+      }
+    });
+    this.subscription.add(user);
   }
 
   async handleLogout() {

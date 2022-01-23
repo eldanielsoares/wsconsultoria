@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import * as uuid from 'uuid';
 import { Documents } from 'src/app/interfaces/documents.dto';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-add-documents',
   templateUrl: './add-documents.component.html',
@@ -40,26 +41,31 @@ export class AddDocumentsComponent implements OnInit {
 
 
   getFile(evt: any) {
-    this.nameFile = evt.target.files[0].name + uuid.v4();
+    this.nameFile = evt.target.files[0].name;
     this.uploadedDoc = evt.target.files[0];
   }
 
   async handleAddDoc() {
     try {
-      const path = `docs/${this.nameFile}`
-      await this.storage.upload(path, this.uploadedDoc);
+      this.loading = true;
+      const docId = uuid.v4();
+      const path = `docs/${docId}.pdf`
+      await this.storage.ref(path).put(this.uploadedDoc)
       this.storage.ref(path).getDownloadURL().subscribe((urlDoc) => {
-        const docId = uuid.v4();
         const doc: Documents = {
           docId,
           type: this.addDoc.controls['type'].value,
           uid: this.user.uid,
-          url: urlDoc
+          url: urlDoc,
+          docName: this.nameFile!
         }
         this.adminService.addDocs(doc, docId);
+        this.location.back();
+        this.loading = false;
       });
     } catch (err) {
       console.log(err);
+      this.loading = false;
     }
   }
 

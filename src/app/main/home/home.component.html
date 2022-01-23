@@ -22,11 +22,8 @@
       {{docs.type}}
     </article>
     <div>
-      <button mat-icon-button (click)="openPdf(docs.url)">
-        <mat-icon>open_in_browser</mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon>download</mat-icon>
+      <button mat-icon-button (click)="openPdf(docs.url!)">
+        <mat-icon>chevron_right</mat-icon>
       </button>
     </div>
   </mat-card>

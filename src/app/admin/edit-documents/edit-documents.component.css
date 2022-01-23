@@ -53,6 +53,12 @@ article {
   margin-bottom: 16px;
 }
 
+.fileTitle {
+  font-size: 14px;
+  color: #111;
+  margin: 16px 0;
+}
+
 
 .containerFile {
   width: 80%;

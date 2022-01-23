@@ -9,7 +9,7 @@
   <div class="containerFilter">
     <mat-form-field appearance="outline">
       <mat-label>Filtrar por nome</mat-label>
-      <input matInput />
+      <input matInput placeholder="Digite o nome do cliente" (change)="handleFilterUser($event)" autocomplete="off" />
     </mat-form-field>
     <button mat-button class="icon-button">
       <mat-icon>search</mat-icon>

@@ -26,10 +26,10 @@
       {{docs.type}}
     </article>
     <div>
-      <button mat-icon-button color="accent" (click)="goToEditDoc()">
+      <button mat-icon-button color="accent" (click)="goToEditDoc(docs)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="handleDelete(docs.docId!)">
         <mat-icon color="warn">delete</mat-icon>
       </button>
     </div>

@@ -1,6 +1,7 @@
 export interface Documents {
-  docId: string;
-  url: string;
-  type: string;
-  uid: string;
+  docId?: string;
+  url?: string;
+  type?: string;
+  uid?: string;
+  docName?: string;
 }

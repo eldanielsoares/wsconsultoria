@@ -15,6 +15,7 @@ export class AllDocumentsComponent implements OnInit {
   user?: User
   types = ['CPF', 'RG', 'Carteira de motorista'];
   documents$?: Observable<Documents[]>;
+  typeSelected = 'Todos';
   constructor(
     private router: Router,
     private location: Location,
@@ -29,14 +30,28 @@ export class AllDocumentsComponent implements OnInit {
   }
 
   categoria(evt: any) {
-    console.log(evt.value);
+    this.typeSelected = evt.value;
+    if (this.typeSelected === 'Todos') {
+      this.documents$ = this.adminService.getDocs(this.user?.uid!);
+    } else {
+      this.documents$ = this.adminService.getDocsFilter(this.user?.uid!, this.typeSelected);
+    }
   }
 
-  goToEditDoc() {
-    this.router.navigateByUrl('/admin/edit-documents')
+  goToEditDoc(docs: Documents) {
+    this.router.navigateByUrl('/admin/edit-documents', { state: { docs } })
   }
   goToAddDoc() {
     this.router.navigateByUrl('/admin/add-documents', { state: { user: this.user } });
+  }
+
+  async handleDelete(docId: string) {
+    try {
+      await this.adminService.deleteDoc(docId);
+    } catch (err) {
+      console.log(err);
+
+    }
   }
 
   goback() {

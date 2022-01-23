@@ -12,7 +12,6 @@ import { AdminService } from '../services/admin.service';
 })
 export class AdminDashboardComponent implements OnInit {
   users$?: Observable<UserAdmin[]>;
-
   constructor(
     private adminService: AdminService,
     private router: Router,
@@ -28,6 +27,20 @@ export class AdminDashboardComponent implements OnInit {
 
   goToAddUser() {
     this.router.navigateByUrl('/admin/add-user')
+  }
+
+  async handleFilterUser(event: any) {
+    try {
+      const name = event.target.value;
+      if (name) {
+        this.users$ = this.adminService.getUsersFilter(name);
+      } else {
+        this.users$ = this.adminService.getUsers();
+      }
+
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   async handleLogout() {

@@ -16,8 +16,11 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <article class="fileTitle">
+      Documento atual: {{docs?.docName}}
+    </article>
     <div class="containerFile">
-      <input type="file" accept="application/pdf">
+      <input type="file" accept="application/pdf" (change)="getFile($event)">
     </div>
     <button mat-raised-button color="primary" [disabled]="!editDoc.valid" type="submit">Salvar documento</button>
   </form>
