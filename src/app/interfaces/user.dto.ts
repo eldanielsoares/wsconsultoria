@@ -7,4 +7,5 @@ export interface UserAdmin {
 export interface User {
   name?: string;
   uid?: string;
+  admin?: boolean;
 }

@@ -21,11 +21,11 @@ export class AdminService {
   }
 
   getUsers(): Observable<UserAdmin[]> {
-    return this.afs.collection<UserAdmin>(Constants.COLLECTIONS.USER_COLLECTION).valueChanges()
+    return this.afs.collection<UserAdmin>(Constants.COLLECTIONS.USER_COLLECTION, ref => ref.where('admin', '!=', true)).valueChanges()
   }
 
   getUsersFilter(name: string): Observable<UserAdmin[]> {
-    return this.afs.collection<UserAdmin>(Constants.COLLECTIONS.USER_COLLECTION, ref => ref.where('name', '==', name)).valueChanges()
+    return this.afs.collection<UserAdmin>(Constants.COLLECTIONS.USER_COLLECTION, ref => ref.where('name', '==', name).where('admin', '!=', true)).valueChanges()
   }
 
   getDocs(uid: string): Observable<Documents[]> {

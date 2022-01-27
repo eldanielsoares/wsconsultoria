@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     const user = this.fireAuth.authState.subscribe((user) => {
+      console.log(user?.uid);
+
       this.documents$ = this.adminService.getDocs(user?.uid!)
     });
     this.subscription.add(user);

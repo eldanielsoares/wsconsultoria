@@ -34,7 +34,13 @@ export class AdminDashboardComponent implements OnInit {
 
   async handleFilterUser(event: any) {
     try {
+
       const name = event.target.value;
+      this.adminService.getUsersFilter(name).subscribe(() => {
+
+      }, err => {
+        console.log(err);
+      })
       if (name) {
         this.users$ = this.adminService.getUsersFilter(name);
       } else {
