@@ -41,4 +41,8 @@ export class AdminSigninComponent implements OnInit {
       this.loading = false;
     }
   }
+
+  goToSignUp() {
+    this.routes.navigateByUrl('/admin/admin-signup');
+  }
 }

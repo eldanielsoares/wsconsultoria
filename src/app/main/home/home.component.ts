@@ -1,3 +1,4 @@
+import { User } from './../../interfaces/user.dto';
 import { AdminService } from './../../admin/services/admin.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/service/auth.service';
@@ -6,6 +7,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Documents } from 'src/app/interfaces/documents.dto';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { NotifyService } from 'src/app/notifications/notify.service';
+import { types } from 'src/app/data/types';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,8 @@ import { NotifyService } from 'src/app/notifications/notify.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  types = ['CPF', 'RG', 'Carteira de motorista'];
+  types = types;
+  user$?: Observable<User[]>
   documents$?: Observable<Documents[]>
   subscription = new Subscription
   meta?: Observable<any>;
@@ -27,9 +30,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     const user = this.fireAuth.authState.subscribe((user) => {
-      console.log(user?.uid);
-
-      this.documents$ = this.adminService.getDocs(user?.uid!)
+      this.user$ = this.adminService.getMyUser(user?.uid!);
+      this.documents$ = this.adminService.getDocs(user?.uid!);
     });
     this.subscription.add(user);
   }

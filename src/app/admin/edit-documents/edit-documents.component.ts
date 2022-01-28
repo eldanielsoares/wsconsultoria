@@ -4,9 +4,9 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as uuid from 'uuid';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { NotifyService } from 'src/app/notifications/notify.service';
+import { types } from 'src/app/data/types';
 
 @Component({
   selector: 'app-edit-documents',
@@ -19,8 +19,9 @@ export class EditDocumentsComponent implements OnInit {
   docs?: Documents
   editDoc = this.fb.group({
     'type': ['', [Validators.required]],
+    'subtype': ['', [Validators.required]]
   })
-  types = ['CPF', 'RG', 'Carteira de motorista'];
+  types = types;
   loading = false;
   constructor(
     private location: Location,
@@ -32,6 +33,7 @@ export class EditDocumentsComponent implements OnInit {
     const nav = this.router.getCurrentNavigation()
     this.docs = nav?.extras.state?.docs;
     this.editDoc.controls['type'].setValue(this.docs?.type);
+    this.editDoc.controls['subtype'].setValue(this.docs?.subtype || '');
   }
 
   ngOnInit(): void {
@@ -44,8 +46,6 @@ export class EditDocumentsComponent implements OnInit {
   getFile(evt: any) {
     this.nameFile = evt.target.files[0].name;
     this.uploadedDoc = evt.target.files[0];
-    console.log(this.nameFile);
-
   }
 
   async handleUpdateNoFile() {
@@ -53,6 +53,7 @@ export class EditDocumentsComponent implements OnInit {
       const doc: Documents = {
         docId: this.docs?.docId!,
         type: this.editDoc.controls['type'].value,
+        subtype: this.editDoc.controls['subtype'].value,
       }
       await this.adminService.updateDocs(doc, this.docs?.docId!);
       this.location.back();
@@ -70,7 +71,8 @@ export class EditDocumentsComponent implements OnInit {
         const doc: Documents = {
           type: this.editDoc.controls['type'].value,
           url: urlDoc,
-          docName: this.nameFile!
+          docName: this.nameFile!,
+          subtype: this.editDoc.controls['subtype'].value,
         }
         this.adminService.updateDocs(doc, this.docs?.docId!);
         this.location.back();

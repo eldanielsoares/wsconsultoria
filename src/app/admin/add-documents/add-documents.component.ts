@@ -8,6 +8,7 @@ import * as uuid from 'uuid';
 import { Documents } from 'src/app/interfaces/documents.dto';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { NotifyService } from 'src/app/notifications/notify.service';
+import { types } from 'src/app/data/types';
 @Component({
   selector: 'app-add-documents',
   templateUrl: './add-documents.component.html',
@@ -19,8 +20,9 @@ export class AddDocumentsComponent implements OnInit {
   uploadedDoc?: Blob
   addDoc = this.fb.group({
     'type': ['', [Validators.required]],
+    'subtype': ['', [Validators.required]]
   })
-  types = ['CPF', 'RG', 'Carteira de motorista'];
+  types = types;
   loading = false;
   constructor(
     private location: Location,
@@ -59,13 +61,15 @@ export class AddDocumentsComponent implements OnInit {
           type: this.addDoc.controls['type'].value,
           uid: this.user.uid,
           url: urlDoc,
-          docName: this.nameFile!
+          docName: this.nameFile!,
+          subtype: this.addDoc.controls['subtype'].value,
         }
         this.adminService.addDocs(doc, docId);
         this.location.back();
         this.loading = false;
       });
     } catch (err) {
+      console.log(err);
       this.notify.notifications(err as string);
       this.loading = false;
     }

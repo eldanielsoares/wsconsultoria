@@ -12,6 +12,7 @@ import { AddDocumentsComponent } from './add-documents/add-documents.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { AllDocumentsComponent } from './all-documents/all-documents.component';
 import { EditDocumentsComponent } from './edit-documents/edit-documents.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EditDocumentsComponent } from './edit-documents/edit-documents.componen
     AddDocumentsComponent,
     AddUserComponent,
     AllDocumentsComponent,
-    EditDocumentsComponent
+    EditDocumentsComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,

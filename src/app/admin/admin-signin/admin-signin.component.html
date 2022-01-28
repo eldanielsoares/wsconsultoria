@@ -16,7 +16,7 @@
       </button>
     </mat-form-field>
     <button mat-raised-button color="primary" [disabled]="!signin.valid" type="submit">Entrar</button>
-    <button mat-raised-button routerLink="/admin/admin-signup">Criar conta de administrador</button>
+    <button mat-raised-button (click)="goToSignUp()">Criar conta de administrador</button>
   </form>
 
   <ng-template #loadingTemplate>

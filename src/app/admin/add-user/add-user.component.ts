@@ -52,7 +52,8 @@ export class AddUserComponent implements OnInit {
       const dataUser: User = {
         name: name,
         uid: result.uid,
-        admin: false
+        admin: false,
+        isValid: true
       }
       this.adminService.createUsers(result.uid, dataUser).then(() => {
         this.location.back();

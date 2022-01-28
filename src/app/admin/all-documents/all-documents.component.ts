@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Documents } from 'src/app/interfaces/documents.dto';
 import { User } from 'src/app/interfaces/user.dto';
 import { NotifyService } from 'src/app/notifications/notify.service';
+import { types } from 'src/app/data/types';
 
 @Component({
   selector: 'app-all-documents',
@@ -14,7 +15,7 @@ import { NotifyService } from 'src/app/notifications/notify.service';
 })
 export class AllDocumentsComponent implements OnInit {
   user?: User
-  types = ['CPF', 'RG', 'Carteira de motorista'];
+  types = types
   documents$?: Observable<Documents[]>;
   typeSelected = 'Todos';
   constructor(
@@ -43,8 +44,12 @@ export class AllDocumentsComponent implements OnInit {
   goToEditDoc(docs: Documents) {
     this.router.navigateByUrl('/admin/edit-documents', { state: { docs } })
   }
+
   goToAddDoc() {
     this.router.navigateByUrl('/admin/add-documents', { state: { user: this.user } });
+  }
+  goToEditUser() {
+    this.router.navigateByUrl('/admin/edit-user', { state: { user: this.user } });
   }
 
   async handleDelete(docId: string) {

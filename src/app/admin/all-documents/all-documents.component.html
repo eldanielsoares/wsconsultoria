@@ -19,12 +19,20 @@
 
   <article class="title" style="margin: 16px 0;">
     {{user?.name}}
+    <button mat-icon-button (click)="goToEditUser()">
+      <mat-icon>edit</mat-icon>
+    </button>
   </article>
 
   <mat-card *ngFor="let docs of documents$ | async">
-    <article class="title">
-      {{docs.type}}
-    </article>
+    <div class="containerType">
+      <article class="title">
+        {{docs.type}}
+      </article>
+      <article class="title">
+        {{docs.subtype}}
+      </article>
+    </div>
     <div>
       <button mat-icon-button color="accent" (click)="goToEditDoc(docs)">
         <mat-icon>edit</mat-icon>

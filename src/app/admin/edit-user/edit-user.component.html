@@ -1,0 +1,20 @@
+<mat-toolbar>
+  <button mat-icon-button style="width: auto;">
+    <mat-icon class="icon" (click)="goback()">chevron_left</mat-icon>
+    Editar usuário
+  </button>
+</mat-toolbar>
+
+<div class="container">
+  <form [formGroup]="editUser" class="form" (ngSubmit)="handleEditUser()" *ngIf="!loading; else loadingTemplate">
+    <article>Crie uma conta para seu usuário</article>
+    <mat-form-field appearance="outline">
+      <mat-label>Nome do cliente</mat-label>
+      <input matInput required placeholder="Digite o nome do cliente" formControlName="name" autocomplete="off">
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="!editUser.valid" type="submit">Atualizar usuário</button>
+  </form>
+  <ng-template #loadingTemplate>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>

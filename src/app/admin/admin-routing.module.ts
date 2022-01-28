@@ -1,3 +1,4 @@
+import { EditUserComponent } from './edit-user/edit-user.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { EditDocumentsComponent } from './edit-documents/edit-documents.component';
 import { AllDocumentsComponent } from './all-documents/all-documents.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'all-documents', component: AllDocumentsComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
   { path: 'edit-documents', component: EditDocumentsComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
   { path: 'add-user', component: AddUserComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'edit-user', component: EditUserComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
 ];
 
 @NgModule({

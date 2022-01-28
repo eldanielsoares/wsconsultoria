@@ -16,6 +16,10 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Subtipo do documento</mat-label>
+      <input matInput placeholder="Digite o nome do cliente" formControlName="subtype" autocomplete="off">
+    </mat-form-field>
     <div class="containerFile">
       <input type="file" accept="application/pdf" (change)="getFile($event)">
     </div>

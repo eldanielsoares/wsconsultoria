@@ -2,9 +2,10 @@ import { AuthService } from 'src/app/auth/service/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserAdmin } from 'src/app/interfaces/user.dto';
+import { User } from 'src/app/interfaces/user.dto';
 import { AdminService } from '../services/admin.service';
 import { NotifyService } from 'src/app/notifications/notify.service';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,7 +13,7 @@ import { NotifyService } from 'src/app/notifications/notify.service';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  users$?: Observable<UserAdmin[]>;
+  users$?: Observable<User[]>;
   constructor(
     private adminService: AdminService,
     private router: Router,
@@ -59,6 +60,16 @@ export class AdminDashboardComponent implements OnInit {
     } catch (err) {
       this.notify.notifications(err as string);
 
+    }
+  }
+
+  async updateIsValid(uid: string, isValid: boolean) {
+    try {
+      await this.adminService.IsValidUpdate(uid, !isValid);
+      this.notify.notifications('Atualizado com sucesso');
+
+    } catch (err) {
+      this.notify.notifications(err as string);
     }
   }
 

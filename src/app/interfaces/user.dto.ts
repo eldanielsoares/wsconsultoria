@@ -8,4 +8,5 @@ export interface User {
   name?: string;
   uid?: string;
   admin?: boolean;
+  isValid?: boolean;
 }

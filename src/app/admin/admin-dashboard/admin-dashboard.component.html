@@ -21,6 +21,9 @@
       {{user.name}}
     </article>
     <div>
+      <button mat-icon-button (click)="updateIsValid(user.uid!, user.isValid!)">
+        <mat-icon>{{user.isValid ? 'lock_open' : 'lock'}}</mat-icon>
+      </button>
       <button mat-icon-button>
         <mat-icon>chevron_right</mat-icon>
       </button>

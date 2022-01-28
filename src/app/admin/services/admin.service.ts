@@ -20,8 +20,16 @@ export class AdminService {
     return await this.afs.collection(Constants.COLLECTIONS.USER_COLLECTION).doc(docId).set(data);
   }
 
-  getUsers(): Observable<UserAdmin[]> {
+  async UpdateUsers(docId: string, data: User) {
+    return await this.afs.collection(Constants.COLLECTIONS.USER_COLLECTION).doc(docId).update(data);
+  }
+
+  getUsers(): Observable<User[]> {
     return this.afs.collection<UserAdmin>(Constants.COLLECTIONS.USER_COLLECTION, ref => ref.where('admin', '!=', true)).valueChanges()
+  }
+
+  getMyUser(uid: string): Observable<User[]> {
+    return this.afs.collection<UserAdmin>(Constants.COLLECTIONS.USER_COLLECTION, ref => ref.where('uid', '==', uid)).valueChanges()
   }
 
   getUsersFilter(name: string): Observable<UserAdmin[]> {
@@ -45,6 +53,10 @@ export class AdminService {
 
   async deleteDoc(docId: string) {
     return await this.afs.collection(Constants.COLLECTIONS.DOC_COLLECTION).doc(docId).delete();
+  }
+
+  async IsValidUpdate(docId: string, isValid: boolean) {
+    return await this.afs.collection(Constants.COLLECTIONS.USER_COLLECTION).doc(docId).update({ isValid });
   }
 
 

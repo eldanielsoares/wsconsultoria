@@ -4,4 +4,5 @@ export interface Documents {
   type?: string;
   uid?: string;
   docName?: string;
+  subtype?: string
 }

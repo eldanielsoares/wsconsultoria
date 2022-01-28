@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "wsconsultoria-be012"
+  },
+  "targets": {
+    "wsconsultoria-be012": {
+      "hosting": {
+        "ws": [
+          "wsconsultorias"
+        ]
+      }
+    }
+  }
+}
